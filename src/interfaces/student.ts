@@ -1,8 +1,8 @@
-import { Favcourse } from './favcourse';
-export interface Student {
+import { FavcourseVM } from './favcourse';
+export interface StudentVM {
   id:number,
   name:string,
   email:string,
   phone:string,
-  favCourse:Favcourse;
+  favCourse:FavcourseVM;
 }

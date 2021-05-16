@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeesService } from '../../services/employees.service';
-import { Employee } from '../../interfaces/employee';
+import { EmployeeVM } from '../../interfaces/employee';
 import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-employee',
@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
-  employees:Employee[]=[];
+  employees:EmployeeVM[]=[];
   Name:string='';
   Email:string='';
   Phone:string='';
@@ -59,7 +59,7 @@ addEmp(){
     alert('Salary should be in the range (1000 - 9999)');
   } 
   else{
-    let emp:Employee={
+    let emp:EmployeeVM={
       id:0,
       email:this.Email,
       name:this.Name,
@@ -75,7 +75,7 @@ addEmp(){
     this.showDialog=!this.showDialog;
   }
 }
-onEditClick(emp:Employee){
+onEditClick(emp:EmployeeVM){
   this.AddOrEdit='Edit';
   this.Id=emp.id;
   this.Name=emp.name;
@@ -103,7 +103,7 @@ editEmp(){
     alert('Salary should be in the range (1000 - 9999)');
   } 
   else{
-  let emp:Employee={
+  let emp:EmployeeVM={
       id:this.Id,
       email:this.Email,
       name:this.Name,

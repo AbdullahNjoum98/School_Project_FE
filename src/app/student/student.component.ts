@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Student } from 'src/interfaces/student';
+import { StudentVM } from 'src/interfaces/student';
 import { StudentsService } from '../../services/students.service';
-import { Favcourse } from '../../interfaces/favcourse';
+import { FavcourseVM } from '../../interfaces/favcourse';
 
 @Component({
   selector: 'app-student',
@@ -13,7 +13,7 @@ export class StudentComponent implements OnInit {
 
   constructor(private studentService:StudentsService) { }
 
-  students:Student[]=[];
+  students:StudentVM[]=[];
   Name:string='';
   Email:string='';
   Phone:string='';
@@ -59,7 +59,7 @@ addStudent(){
     alert('Invalid Phone Number (should be 10 number digits)');
   }
   else{
-  let student:Student={
+  let student:StudentVM={
       id:0,
       email:this.Email,
       name:this.Name,
@@ -80,7 +80,7 @@ addStudent(){
     this.showDialog=!this.showDialog;
   }
 }
-onEditClick(student:Student){
+onEditClick(student:StudentVM){
   this.AddOrEdit='Edit';
   this.Id=student.id;
   this.Name=student.name;
@@ -105,7 +105,7 @@ editStudent(){
     alert('Invalid Phone Number (should be 10 number digits)');
   }
   else{
-  let student:Student={
+  let student:StudentVM={
       id:this.Id,
       email:this.Email,
       name:this.Name,

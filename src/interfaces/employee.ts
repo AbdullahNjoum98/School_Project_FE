@@ -1,4 +1,4 @@
-export interface Employee {
+export interface EmployeeVM {
   id:number,
   name:string,
   email:string,
