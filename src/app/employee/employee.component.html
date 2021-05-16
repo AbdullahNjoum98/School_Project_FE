@@ -1,0 +1,42 @@
+<ng-container *ngIf="!showDialog">
+<button (click)="onAddClick()" class="btn btn-primary">Add New</button>
+<button routerLink="" class="btn btn-primary">Go Back</button>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Salary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of employees let i= index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{employee.name}}</td>
+      <td>{{employee.email}}</td>
+      <td>{{employee.phone}}</td>
+      <td>{{employee.salary}}</td>
+      <button (click)="this.showDialog=!this.showDialog;onEditClick(employee)" class="btn btn-info">edit</button>
+      <button (click)="deleteEmp(employee.id)" class="btn btn-warning">delete</button>
+    </tr>
+  </tbody>
+</table>
+</ng-container>
+<form *ngIf="showDialog">
+  <div>
+  <div><label>{{AddOrEdit}} an Employee</label></div>
+  <hr/>
+  <label>Name</label>
+  <input class="form-control" [(ngModel)]="Name" [ngModelOptions]="{standalone: true}"/>
+  <label>Email</label>
+  <input class="form-control" [(ngModel)]="Email" [ngModelOptions]="{standalone: true}"/>
+  <label>Phone</label>
+  <input class="form-control" [(ngModel)]="Phone" [ngModelOptions]="{standalone: true}"/>
+  <label>Salary</label>
+  <input class="form-control" [(ngModel)]="Salary" [ngModelOptions]="{standalone: true}"/>
+  <button class="btn btn-primary" (click)="AddOrEdit=='Add'?addEmp():editEmp()">{{ AddOrEdit }}</button>
+  <button class="btn btn-danger" (click)="this.showDialog=!this.showDialog">Cancel</button>
+</div>
+</form>
