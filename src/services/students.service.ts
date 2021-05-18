@@ -9,22 +9,22 @@ import { StudentResource } from 'src/interfaces/studentResource';
 })
 export class StudentsService {
 
-  private API:string='Students'
-  constructor(private apiService:ApiService) { }
-  getAllStudents():Observable<StudentResource[]>{
+  private API = 'Students';
+  constructor(private apiService: ApiService) { }
+  getAllStudents(): Observable<StudentResource[]> {
     return this.apiService.get<StudentResource[]>(this.API);
   }
-  getStudentById(id:string):Observable<StudentResource>{
-    return this.apiService.get<StudentResource>(this.API+'/'+id);
+  getStudentById(id: string): Observable<StudentResource> {
+    return this.apiService.get<StudentResource>(this.API + '/' + id);
   }
 
-  addStudent(student:StudentVM):Observable<StudentResource>{
-    return this.apiService.post<StudentVM>(this.API,student);
+  addStudent(student: StudentVM): Observable<StudentResource> {
+    return this.apiService.post<StudentVM>(this.API, student);
   }
-  editStudent(student:StudentVM):Observable<StudentResource>{
-    return this.apiService.put<StudentVM>(this.API,student);
+  editStudent(student: StudentVM): Observable<StudentResource> {
+    return this.apiService.put<StudentVM>(this.API, student);
   }
-  deleteStudent(id:number):Observable<string>{
-    return this.apiService.delete<StudentVM>(this.API+'/'+id);
+  deleteStudent(id: number): Observable<string> {
+    return this.apiService.delete<StudentVM>(this.API + '/' + id);
   }
 }

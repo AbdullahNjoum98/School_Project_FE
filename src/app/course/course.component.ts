@@ -11,38 +11,36 @@ import { FavCourseVM } from '../../interfaces/favcourseVM';
 })
 export class CourseComponent implements OnInit {
 
-  courses:FavCourseVM[]=[];
-  Name:string='';
-  Code:string='';
-  Id:any;
-  constructor(public courseService:CoursesService) { }
+  courses: FavCourseVM[] = [];
+  Name = '';
+  Code = '';
+  Id: any;
+  constructor(public courseService: CoursesService) { }
 
   ngOnInit(): void {
-    this.courseService.getAllCourses().subscribe(e=>{
-    e.forEach(item=>
-      {
+    this.courseService.getAllCourses().subscribe(e => {
+      e.forEach(item => {
         this.courses.push(item);
       })
     },
-    err=>{
-      alert(err.error);
-    });
+      err => {
+        alert(err.error);
+      });
   }
-  
 
-deleteCourse(Id:number){
-  //Reflect changes on Database
-  this.courseService.deleteCourse(Id).subscribe(() =>
-    {
+
+  deleteCourse(Id: number): void {
+    // Reflect changes on Database
+    this.courseService.deleteCourse(Id).subscribe(() => {
       alert('Course has been Deleted Successfully!');
-      //Reflect changes on UI
-      let courseToBeDeleted= this.courses.find(e=>e.id==Id);
-      this.courses=this.courses.filter(e=>e != courseToBeDeleted);
+      // Reflect changes on UI
+      const courseToBeDeleted = this.courses.find(e => e.id === Id);
+      this.courses = this.courses.filter(e => e !== courseToBeDeleted);
     },
-    
-    err=>{
-      alert(err.error);
-    }
+
+      err => {
+        alert(err.error);
+      }
     );
-}
+  }
 }
