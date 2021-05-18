@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { StudentVM } from '../interfaces/student';
+import { StudentVM } from '../interfaces/studentVM';
 import { Observable } from 'rxjs';
+import { StudentResource } from 'src/interfaces/studentResource';
 
 @Injectable({
   providedIn: 'root'
@@ -10,20 +11,20 @@ export class StudentsService {
 
   private API:string='Students'
   constructor(private apiService:ApiService) { }
-  getAllStudents():Observable<StudentVM[]>{
-    return this.apiService.get<StudentVM[]>(this.API);
+  getAllStudents():Observable<StudentResource[]>{
+    return this.apiService.get<StudentResource[]>(this.API);
   }
-  getStudentById(id:string):Observable<StudentVM>{
-    return this.apiService.get<StudentVM>(this.API+'/'+id);
+  getStudentById(id:string):Observable<StudentResource>{
+    return this.apiService.get<StudentResource>(this.API+'/'+id);
   }
 
-  addStudent(student:StudentVM):Observable<StudentVM>{
+  addStudent(student:StudentVM):Observable<StudentResource>{
     return this.apiService.post<StudentVM>(this.API,student);
   }
-  editStudent(student:StudentVM):Observable<StudentVM>{
+  editStudent(student:StudentVM):Observable<StudentResource>{
     return this.apiService.put<StudentVM>(this.API,student);
   }
-  deleteStudent(id:number){
+  deleteStudent(id:number):Observable<string>{
     return this.apiService.delete<StudentVM>(this.API+'/'+id);
   }
 }

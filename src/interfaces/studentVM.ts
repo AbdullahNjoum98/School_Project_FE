@@ -1,8 +1,8 @@
-import { FavcourseVM } from './favcourse';
+import { FavCourseVM } from './favcourseVM';
 export interface StudentVM {
   id:number,
   name:string,
   email:string,
   phone:string,
-  favCourse:FavcourseVM;
+  favCourses:FavCourseVM[];
 }

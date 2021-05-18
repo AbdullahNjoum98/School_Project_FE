@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { EmployeeComponent } from './employee/employee.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
+import { AddEditComponent } from './add-edit/add-edit.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,17 @@ const routes: Routes = [
     import("./student/student.module").then(
       (module)=> module.StudentRoutingModule
     )
+  },
+  {
+    path: "courses",
+    loadChildren: () =>
+      import("./course/course.module").then(
+        (module) => module.CourseRoutingModule
+      ),
+  },
+  {
+    path : '**',
+    redirectTo : '/'
   }
 ];
 

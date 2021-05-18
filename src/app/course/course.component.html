@@ -1,0 +1,24 @@
+<ng-container >
+    <button [routerLink]="['addeditcourse',0]" class="btn btn-primary">Add New</button>
+    <button routerLink="" class="btn btn-primary">Go Back</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Code</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of courses let i= index">
+          <th scope="row">{{i+1}}</th>
+          <td>{{course.name}}</td>
+          <td>{{course.code}}</td>
+          <button [routerLink]="['addeditcourse', course.id]" class="btn btn-info">Edit</button>
+          <button (click)="deleteCourse(course.id)" class="btn btn-warning">Delete</button>
+        </tr>
+      </tbody>
+    </table>
+    </ng-container>
+    
+    

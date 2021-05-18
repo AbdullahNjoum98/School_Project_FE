@@ -13,6 +13,12 @@ import { MainpageComponent } from './mainpage/mainpage.component';
 import { ApiService } from 'src/services/api.service';
 import { EmployeesService } from 'src/services/employees.service';
 import { FormsModule } from '@angular/forms';
+import { AddEditComponent } from './add-edit/add-edit.component';
+import { AddEditStudentComponent } from './add-edit-student/add-edit-student.component';
+import { CourseComponent } from './course/course.component';
+import { AddEditCourseComponent } from './add-edit-course/add-edit-course.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -20,7 +26,11 @@ import { FormsModule } from '@angular/forms';
     EmployeeComponent,
     StudentComponent,
     ContactusComponent,
-    MainpageComponent
+    MainpageComponent,
+    AddEditComponent,
+    AddEditStudentComponent,
+    CourseComponent,
+    AddEditCourseComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +38,9 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     EmployeeRoutingModule,
     StudentRoutingModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule,
+    BrowserAnimationsModule
   ],
   providers: [EmployeesService, ApiService],
   bootstrap: [AppComponent]

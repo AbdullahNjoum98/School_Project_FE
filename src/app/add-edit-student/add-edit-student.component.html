@@ -1,0 +1,24 @@
+<form>
+    <div>
+    <div><label>{{AddOrEdit}} an Student</label></div>
+    <hr/>
+    <label>Name</label>
+    <input class="form-control" [(ngModel)]="Name" [ngModelOptions]="{standalone: true}"/>
+    <label>Email</label>
+    <input class="form-control" [(ngModel)]="Email" [ngModelOptions]="{standalone: true}"/>
+    <label>Phone</label>
+    <input class="form-control" [(ngModel)]="Phone" [ngModelOptions]="{standalone: true}"/>
+    <label>Fav Course</label>
+    <br/>
+    <mat-form-field>
+      <mat-label>Choose Your Favourite Course</mat-label>
+      <mat-select [(ngModel)]="selectedCourses" [ngModelOptions]="{standalone: true}" multiple>
+        <mat-option  *ngFor="let course of courses" [value]="course.id">{{course.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <small class="form-control" *ngIf="error!=''">{{error}}</small>
+  
+    <button class="btn btn-primary" (click)="AddOrEdit=='Add'?addStud():editStud()">{{ AddOrEdit }}</button>
+    <button class="btn btn-danger" [routerLink]="['/students']"> Close </button>
+  </div>
+  </form>
