@@ -11,13 +11,13 @@ import { environment } from '../environments/environment';
 export class ApiService {
     constructor(private http: HttpClient) { }
 
-    get<T>(path:string) {
-      path=environment.Host+path;
+    get<T>(path:string, host:string) {
+      path=host+path;
       return this.http.get<T>(path);
     }
 
-    post<T>(path:string, object:any) {
-      path=environment.Host+path;
+    post<T>(path:string, host:string, object:any) {
+      path=host+path;
       // const body=JSON.stringify(object);
       // return this.http.post<T>(path , body);
       const body = JSON.stringify(object);
@@ -31,8 +31,8 @@ export class ApiService {
       .post(path, body, options)
       .pipe(map((res: any) => res));
     }
-    put<T>(path:string,object:any){
-      path=environment.Host+path;
+    put<T>(path:string, host:string,object:any){
+      path=host+path;
       // const body=JSON.stringify(object);
       // return this.http.put<T>(path , body);
       const body = JSON.stringify(object);
@@ -46,8 +46,8 @@ export class ApiService {
       .put(path, body, options)
       .pipe(map((res: any) => res));
     }
-    delete<T>(path:string){
-      path=environment.Host+path;
+    delete<T>(path:string, host:string){
+      path=host+path;
       const headers= new HttpHeaders({
         "Content-Type": "application/json;charset=utf-8;",
       });

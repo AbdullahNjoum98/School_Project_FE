@@ -19,6 +19,8 @@ import { CourseComponent } from './course/course.component';
 import { AddEditCourseComponent } from './add-edit-course/add-edit-course.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSelectModule} from '@angular/material/select';
+import { TeacherComponent } from './teacher/teacher.component';
+import { AddEditTeacherComponent } from './add-edit-teacher/add-edit-teacher.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import {MatSelectModule} from '@angular/material/select';
     AddEditComponent,
     AddEditStudentComponent,
     CourseComponent,
-    AddEditCourseComponent
+    AddEditCourseComponent,
+    TeacherComponent,
+    AddEditTeacherComponent
   ],
   imports: [
     BrowserModule,

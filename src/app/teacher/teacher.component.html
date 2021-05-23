@@ -1,0 +1,23 @@
+<ng-container>
+    <button [routerLink]="['addeditteacher',0]" class="btn btn-primary">Add New</button>
+    <button routerLink="" class="btn btn-primary">Go Back</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Degree</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let teacher of teachers let i=index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{teacher.name}}</td>
+        <td>{{teacher.degree}}</td>
+        <button [routerLink]="['addeditteacher', teacher.id]" class="btn btn-info">Edit</button>
+        <button (click)="deleteTeacher(teacher.id)" class="btn btn-warning">Delete</button>
+        </tr>
+      </tbody>
+    </table>
+    </ng-container>
+  

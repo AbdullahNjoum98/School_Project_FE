@@ -29,6 +29,13 @@ const routes: Routes = [
     )
   },
   {
+    path:'teachers',
+    loadChildren:()=>
+    import("./teacher/teacher.module").then(
+      (module)=> module.TeacherRoutingModule
+    )
+  },
+  {
     path: "courses",
     loadChildren: () =>
       import("./course/course.module").then(
