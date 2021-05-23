@@ -5,4 +5,5 @@ export interface StudentVM {
   email: string;
   phone: string;
   favCourses: number[];
+  teacher:number;
 }

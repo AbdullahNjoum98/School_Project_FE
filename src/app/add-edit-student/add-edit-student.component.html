@@ -1,6 +1,6 @@
 <form>
     <div>
-    <div><label>{{AddOrEdit}} an Student</label></div>
+    <div><label>{{AddOrEdit}} a Student</label></div>
     <hr/>
     <label>Name</label>
     <input class="form-control" [(ngModel)]="Name" [ngModelOptions]="{standalone: true}"/>
@@ -16,9 +16,18 @@
         <mat-option  *ngFor="let course of courses" [value]="course.id">{{course.name}}</mat-option>
       </mat-select>
     </mat-form-field>
+    <br/>
+    <mat-form-field>
+      <mat-label>Choose Your Teacher</mat-label>
+      <mat-select [(ngModel)]="selectedTeacher" [ngModelOptions]="{standalone: true}">
+        <mat-option  *ngFor="let teacher of teachers" [value]="teacher.id">{{teacher.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
     <small class="form-control" *ngIf="error!=''">{{error}}</small>
+    <br/>
   
     <button class="btn btn-primary" (click)="AddOrEdit=='Add'?addStud():editStud()">{{ AddOrEdit }}</button>
     <button class="btn btn-danger" [routerLink]="['/students']"> Close </button>
+  
   </div>
   </form>

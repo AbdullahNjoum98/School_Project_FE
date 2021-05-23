@@ -7,6 +7,8 @@ import { FavCourseVM } from '../../interfaces/favcourseVM';
 import { SelectItem } from 'primeng/api';
 import { FavCourseResource } from '../../interfaces/fav-course-resource';
 import { StudentResource } from '../../interfaces/studentResource';
+import { TeacherVM } from 'src/interfaces/teacher-vm';
+import { TeachersService } from 'src/services/teachers.service';
 
 @Component({
   selector: 'app-add-edit-student',
@@ -16,7 +18,9 @@ import { StudentResource } from '../../interfaces/studentResource';
 export class AddEditStudentComponent implements OnInit {
 
   courses: FavCourseVM[] = [];
+  teachers: TeacherVM[] =[];
   selectedCourses: number[] = [];
+  selectedTeacher: number=0;
   error = '';
   AddOrEdit = 'Add';
   Id: any = 0;
@@ -34,10 +38,11 @@ export class AddEditStudentComponent implements OnInit {
   constructor(private studentsService: StudentsService,
               private route: ActivatedRoute,
               private router: Router,
-              public courseService: CoursesService) { }
+              public courseService: CoursesService,
+              public teachersService: TeachersService) { }
 
   ngOnInit(): void {
-    // tslint:disable-next-line:no-string-literal
+    debugger;    
     this.Id = +this.route.snapshot.params['id'];
     if (this.Id !== 0) {
       this.AddOrEdit = 'Edit';
@@ -46,6 +51,7 @@ export class AddEditStudentComponent implements OnInit {
         this.Phone = e.phone;
         this.Email = e.email;
         this.selectedCourses = this.getIds(e.favCourses);
+        this.selectedTeacher = e.teacher.id;
       });
     }
     this.courseService.getAllCourses().subscribe(e => {
@@ -56,12 +62,20 @@ export class AddEditStudentComponent implements OnInit {
       err => {
         alert(err.error);
       });
+      this.teachersService.getAllTeachers().subscribe(e => {
+        e.forEach(item => {
+          this.teachers.push(item);
+        })
+      },
+        err => {
+          alert(err.error);
+        });
   }
-  getIds(courses: FavCourseVM[]): number[] {
+  getIds(entities: any[]): number[] {
 
     const Ids: number[] = [];
-    courses.forEach(course => {
-      Ids.push(course.id);
+    entities.forEach(entity => {
+      Ids.push(entity.id);
     });
     return Ids;
   }
@@ -79,13 +93,20 @@ export class AddEditStudentComponent implements OnInit {
     else if (!this.phoneRegex.test(String(this.Phone).toLowerCase())) {
       this.error = 'Invalid Phone Number (should be 10 number digits)';
     }
+    else if (this.selectedCourses.length==0) {
+      this.error = 'Please Select a Course At least';
+    }
+    else if (this.selectedTeacher==0) {
+      this.error = 'Please Select a Teacher';
+    }
     else {
       const student: StudentVM = {
         id: 0,
         email: this.Email,
         name: this.Name,
         phone: this.Phone,
-        favCourses: this.selectedCourses.slice()
+        favCourses: this.selectedCourses.slice(),
+        teacher: this.selectedTeacher
       };
       // Add employee to Database
       this.studentsService.addStudent(student).subscribe(item => {
@@ -112,6 +133,12 @@ export class AddEditStudentComponent implements OnInit {
     else if (!this.phoneRegex.test(String(this.Phone).toLowerCase())) {
       this.error = 'Invalid Phone Number (should be 10 number digits)';
     }
+    else if (this.selectedCourses.length==0) {
+      this.error = 'Please Select a Course At least';
+    }
+    else if (this.selectedTeacher==0) {
+      this.error = 'Please Select a Teacher';
+    }
     else {
       this.students.filter(e => e.id !== this.Id);
       const student: StudentVM = {
@@ -119,7 +146,8 @@ export class AddEditStudentComponent implements OnInit {
         email: this.Email,
         name: this.Name,
         phone: this.Phone,
-        favCourses: this.selectedCourses
+        favCourses: this.selectedCourses,
+        teacher: this.selectedTeacher
       };
 
       // Reflect changes on Database

@@ -15,12 +15,8 @@ export class StudentComponent implements OnInit {
   constructor(private studentService: StudentsService) { }
 
   students: StudentResource[] = [];
-  Name = '';
-  Email = '';
-  Phone = '';
-  FavCourseName = '';
-  Id: any;
   ngOnInit(): void {
+    debugger;
     this.studentService.getAllStudents().subscribe(e => {
       e.forEach(student => {
         student.favCourseString = '';
@@ -29,22 +25,6 @@ export class StudentComponent implements OnInit {
         });
         this.students.push(student);
       });
-    });
-  }
-  onAddClick(): void{
-    this.Name = '';
-    this.Email = '';
-    this.Phone = '';
-    this.FavCourseName = '';
-  }
-
-  onEditClick(student: StudentResource): void {
-    this.Id = student.id;
-    this.Name = student.name;
-    this.Email = student.email;
-    this.Phone = student.phone;
-    student.favCourses.forEach(element => {
-      this.FavCourseName = this.FavCourseName + element.name + ',';
     });
   }
   deleteStudent(Id: number): void {
