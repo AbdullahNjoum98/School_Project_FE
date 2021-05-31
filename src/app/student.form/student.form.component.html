@@ -1,0 +1,33 @@
+<form (ngSubmit)='processStud(AddOrEdit)'>
+    <div>
+    <div><label>{{AddOrEdit}} a Student</label></div>
+    <hr/>
+    <label>Name</label>
+    <input class="form-control" [(ngModel)]="Name" [ngModelOptions]="{standalone: true}"/>
+    <label>Email</label>
+    <input class="form-control" [(ngModel)]="Email" [ngModelOptions]="{standalone: true}"/>
+    <label>Phone</label>
+    <input class="form-control" [(ngModel)]="Phone" [ngModelOptions]="{standalone: true}"/>
+    <label>Fav Course</label>
+    <br/>
+    <mat-form-field>
+      <mat-label>Choose Your Favourite Course</mat-label>
+      <mat-select [(ngModel)]="selectedCourses" [ngModelOptions]="{standalone: true}" multiple>
+        <mat-option  *ngFor="let course of courses" [value]="course.id">{{course.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br/>
+    <mat-form-field>
+      <mat-label>Choose Your Teacher</mat-label>
+      <mat-select [(ngModel)]="selectedTeacher" [ngModelOptions]="{standalone: true}">
+        <mat-option  *ngFor="let teacher of teachers" [value]="teacher.id">{{teacher.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <small class="form-control" *ngIf="error!=''">{{error}}</small>
+    <br/>
+  
+    <button class="btn btn-primary" type="submit">{{ AddOrEdit }}</button>
+    <button class="btn btn-danger" [routerLink]="['/students']"> Close </button>
+  
+  </div>
+  </form>

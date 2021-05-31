@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { EmployeeComponent } from './employee/employee.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
-import { AddEditComponent } from './add-edit/add-edit.component';
 
 const routes: Routes = [
   {
@@ -17,28 +15,28 @@ const routes: Routes = [
   {
     path: "employees",
     loadChildren: () =>
-      import("./employee/employee.module").then(
+      import("./employees-list/employees-list.module").then(
         (module) => module.EmployeeRoutingModule
       ),
   },
   {
     path:'students',
     loadChildren:()=>
-    import("./student/student.module").then(
+    import("./student-list/student-list.module").then(
       (module)=> module.StudentRoutingModule
     )
   },
   {
     path:'teachers',
     loadChildren:()=>
-    import("./teacher/teacher.module").then(
+    import("./teachers-list/teachers-list.module").then(
       (module)=> module.TeacherRoutingModule
     )
   },
   {
     path: "courses",
     loadChildren: () =>
-      import("./course/course.module").then(
+      import("./courses-list/courses-list.module").then(
         (module) => module.CourseRoutingModule
       ),
   },

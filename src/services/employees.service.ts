@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
 import { EmployeeVM } from 'src/interfaces/employeeVM';
-import { HttpParams } from '@angular/common/http';
 import { EmployeeResource } from 'src/interfaces/employeeResource';
 import { environment } from 'src/environments/environment';
 

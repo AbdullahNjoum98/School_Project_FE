@@ -1,0 +1,16 @@
+<form (ngSubmit)='processTeacher(AddOrEdit)'>
+    <div>
+    <div><label>{{AddOrEdit}} a Teacher</label></div>
+    <hr/>
+    <label>Name</label>
+    <input class="form-control" [(ngModel)]="Name" [ngModelOptions]="{standalone: true}"/>
+    <label>Degree</label>
+    <input class="form-control" [(ngModel)]="Degree" [ngModelOptions]="{standalone: true}"/>
+    <br/>
+    
+    <small class="form-control" *ngIf="error!=''">{{error}}</small>
+  
+    <button class="btn btn-primary" type="submit">{{ AddOrEdit }}</button>
+    <button class="btn btn-danger" [routerLink]="['/students']"> Close </button>
+  </div>
+  </form>

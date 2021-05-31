@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
 import { FavCourseVM } from 'src/interfaces/favcourseVM';
-import { HttpParams } from '@angular/common/http';
 import { FavCourseResource } from 'src/interfaces/fav-course-resource';
 import { environment } from 'src/environments/environment';
 
