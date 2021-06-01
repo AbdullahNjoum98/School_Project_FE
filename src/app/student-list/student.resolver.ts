@@ -5,11 +5,14 @@ import { Observable } from "rxjs";
 import { finalize, first, tap } from "rxjs/operators";
 import { AppState } from "../reducers";
 import { loadAllStudents } from "./student-list.actions";
+import { StudentState } from "./student.reducer";
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class StudentReslover implements Resolve<any> { 
     loading = false;
-    constructor(private store: Store<AppState>){}
+    constructor(private store: Store<StudentState>){}
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<any>
     {
         return this.store.

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ContactusComponent } from './contactus/contactus.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
+import { StudentReslover } from './student-list/student.resolver';
 
 const routes: Routes = [
   {

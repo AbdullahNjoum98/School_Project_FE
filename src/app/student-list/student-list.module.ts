@@ -6,6 +6,8 @@ import { StudentReslover } from './student.resolver';
 import { Actions, EffectsModule } from '@ngrx/effects';
 import { StudentsEffects } from './students.effects';
 import { StudentsService } from 'src/services/students.service';
+import { StoreModule } from '@ngrx/store';
+import { studentListReducer } from './student.reducer';
 
 const routes:Routes=[
   {
@@ -23,9 +25,13 @@ const routes:Routes=[
 @NgModule({
   imports: [
      RouterModule.forChild(routes),
-    // EffectsModule.forFeature([StudentsEffects])
+     EffectsModule.forFeature([StudentsEffects]),
+     StoreModule.forFeature(
+       'students',
+       studentListReducer
+     )
   ],
   exports: [RouterModule],
-  providers: [StudentReslover, StudentsService]
+  providers: [ StudentsService, StudentReslover]
 })
 export class StudentRoutingModule { }

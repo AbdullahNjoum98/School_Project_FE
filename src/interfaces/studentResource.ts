@@ -6,6 +6,6 @@ export interface StudentResource {
   email:string,
   phone:string,
   favCourses:FavCourseVM[],
-  favCourseString:string,
+  favCourseString: string,
   teacher:TeacherVM
 }

@@ -26,6 +26,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { reducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
+import { StudentReslover } from './student-list/student.resolver';
 
 @NgModule({
   declarations: [
@@ -50,9 +51,8 @@ import { EffectsModule } from '@ngrx/effects';
     FormsModule,
     MatSelectModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot(reducers, {}),
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([])
   ],
   providers: [EmployeesService, ApiService],

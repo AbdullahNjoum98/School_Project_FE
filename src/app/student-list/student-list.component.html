@@ -13,16 +13,16 @@
       </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let student of students let i=index">
-      <th scope="row">{{i+1}}</th>
-      <td>{{student.name}}</td>
-      <td>{{student.email}}</td>
-      <td>{{student.phone}}</td>
-      <td>{{student.favCourseString}}</td>
-      <td>{{student.teacher.name}}</td>
-      <button [routerLink]="['addeditstudent', student.id]" class="btn btn-info">Edit</button>
-      <button (click)="deleteStudent(student.id)" class="btn btn-warning">Delete</button>
-      </tr>
+      <tr *ngFor="let student of sts let i=index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{student.name}}</td>
+        <td>{{student.email}}</td>
+        <td>{{student.phone}}</td>
+        <td>{{student.favCourseString}}</td>
+        <td>{{student.teacher.name}}</td>
+        <button [routerLink]="['addeditstudent', student.id]" class="btn btn-info">Edit</button>
+        <button (click)="deleteStudent(student.id)" class="btn btn-warning">Delete</button>
+        </tr>
     </tbody>
   </table>
   </ng-container>
