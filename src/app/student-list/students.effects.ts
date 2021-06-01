@@ -19,7 +19,10 @@ export class StudentsEffects {
                 map(students => {
                     console.log('students', students);
                     students.forEach(student => {
-                        student.favCourseString = 'hahaha';
+                        student.favCourseString='';
+                        student.favCourses.forEach(e=>{
+                            student.favCourseString = student.favCourseString + e.name + ',';
+                        });
                     })
                     return allStudentsLoaded({ students });
                 })
