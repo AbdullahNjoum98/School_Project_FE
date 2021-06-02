@@ -27,7 +27,7 @@ const routes:Routes=[
      RouterModule.forChild(routes),
      EffectsModule.forFeature([StudentsEffects]),
      StoreModule.forFeature(
-       'students',
+       'studentState',
        studentListReducer
      )
   ],

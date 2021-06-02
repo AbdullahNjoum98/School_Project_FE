@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StudentsService } from '../../services/students.service';
 import { StudentResource } from '../../interfaces/studentResource';
 import { select, Store } from '@ngrx/store';
-import { StudentState } from './student.reducer';
-import { map } from 'rxjs/operators';
 import { AppState } from '../reducers';
+import { getAllStudents } from './student.selectors';
 
 @Component({
   selector: 'app-student',
@@ -12,19 +11,14 @@ import { AppState } from '../reducers';
   styleUrls: ['./student-list.component.css']
 })
 export class StudentComponent implements OnInit {
+  sts: StudentResource[] = [];
 
-
-
-  public sts: StudentResource[] = [];
-  constructor(private studentService: StudentsService, private store: Store<StudentState>) { }
-
+  constructor(private studentService: StudentsService, private store: Store<AppState>) { }
   ngOnInit(): void {
-    this.store.pipe(
-      select(state => state)
-    ).subscribe((stuedntsArr) => {
-      this.sts = stuedntsArr.students['students'];
-    }
-    )
+    this.store.pipe(select(getAllStudents))
+      .subscribe(studentsArr =>
+        this.sts = studentsArr
+      );
   }
   deleteStudent(Id: number): void {
     // Reflect changes on Database
