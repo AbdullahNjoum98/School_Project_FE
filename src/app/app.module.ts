@@ -5,16 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EmployeeComponent } from './employees-list/employees-list.component';
-import { StudentComponent } from './student-list/student-list.component';
+import { StudentComponent } from './student/student-list/student-list.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { EmployeeRoutingModule } from './employees-list/employees-list.module';
-import { StudentRoutingModule } from './student-list/student-list.module';
+import { StudentRoutingModule } from './student/student.module';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { ApiService } from 'src/services/api.service';
 import { EmployeesService } from 'src/services/employees.service';
 import { FormsModule } from '@angular/forms';
 import { AddEditComponent } from './employees.form/employees.form.component';
-import { AddEditStudentComponent } from './student.form/student.form.component';
+import { AddEditStudentComponent } from './student/student.form/student.form.component';
 import { CourseComponent } from './courses-list/courses-list.component';
 import { AddEditCourseComponent } from './course.form/course.form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,7 +26,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { reducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
-import { StudentReslover } from './student-list/student.resolver';
 
 @NgModule({
   declarations: [

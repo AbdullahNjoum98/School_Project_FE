@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ContactusComponent } from './contactus/contactus.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
-import { StudentReslover } from './student-list/student.resolver';
 
 const routes: Routes = [
   {
@@ -23,7 +22,7 @@ const routes: Routes = [
   {
     path:'students',
     loadChildren:()=>
-    import("./student-list/student-list.module").then(
+    import("./student/student.module").then(
       (module)=> module.StudentRoutingModule
     )
   },

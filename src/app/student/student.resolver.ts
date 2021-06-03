@@ -4,7 +4,7 @@ import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { finalize, first, tap } from "rxjs/operators";
 import { AppState } from "../reducers";
-import { loadAllStudents } from "./student-list.actions";
+import { loadAllStudents } from "./student.actions";
 
 @Injectable({
     providedIn: 'root'

@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { StudentVM } from '../../interfaces/studentVM';
-import { StudentsService } from '../../services/students.service';
+import { StudentVM } from '../../../interfaces/studentVM';
+import { StudentsService } from '../../../services/students.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CoursesService } from '../../services/courses.service';
-import { FavCourseVM } from '../../interfaces/favcourseVM';
-import { StudentResource } from '../../interfaces/studentResource';
+import { CoursesService } from '../../../services/courses.service';
+import { FavCourseVM } from '../../../interfaces/favcourseVM';
+import { StudentResource } from '../../../interfaces/studentResource';
 import { TeacherVM } from 'src/interfaces/teacher-vm';
 import { TeachersService } from 'src/services/teachers.service';
+import { AppState } from 'src/app/reducers';
+import { Store } from '@ngrx/store';
+import { StudentListActions } from '../action-types';
 
 @Component({
   selector: 'app-add-edit-student',
@@ -37,10 +40,11 @@ export class AddEditStudentComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public courseService: CoursesService,
-    public teachersService: TeachersService) { }
+    public teachersService: TeachersService,
+    private store: Store<AppState>
+    ) { }
 
   ngOnInit(): void {
-    debugger;
     this.Id = +this.route.snapshot.params['id'];
     if (this.Id !== 0) {
       this.AddOrEdit = 'Edit';
@@ -148,17 +152,18 @@ export class AddEditStudentComponent implements OnInit {
           favCourses: this.selectedCourses,
           teacher: this.selectedTeacher
         };
-
+        debugger;
+        this.store.dispatch(StudentListActions.updateStudent({student}))
         // Reflect changes on Database
-        this.studentsService.editStudent(student).subscribe(item => {
-          alert('Student has been Edited Successfully!');
-          // Reflect changes on UI
-          this.students.push(item);
-          this.router.navigate(['students']);
-        },
-          err => {
-            alert(err.error);
-          });
+        // this.studentsService.editStudent(student).subscribe(item => {
+        //   alert('Student has been Edited Successfully!');
+        //   // Reflect changes on UI
+        //   this.students.push(item);
+        this.router.navigate(['students']);
+        // },
+        //   err => {
+        //     alert(err.error);
+        //   });
       }
     }
   }

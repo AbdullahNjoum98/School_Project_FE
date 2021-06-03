@@ -1,9 +1,11 @@
+import { EntityState } from "@ngrx/entity";
 import { ActionReducerMap } from "@ngrx/store";
-import { studentListReducer, StudentState } from "../student-list/student.reducer";
+import { StudentResource } from "src/interfaces/studentResource";
+import { studentReducer } from "../student/student.reducer";
 
-export interface AppState {
-    studentState: StudentState;
+export interface AppState  {
+    studentState: EntityState<StudentResource>;
 }
 export const reducers: ActionReducerMap<AppState> = {
-    studentState: studentListReducer
-  };
+    studentState: studentReducer
+};
