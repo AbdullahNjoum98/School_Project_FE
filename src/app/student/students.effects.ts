@@ -9,7 +9,6 @@ import { CoursesService } from "src/services/courses.service";
 import { StudentsService } from "src/services/students.service";
 import { TeachersService } from "src/services/teachers.service";
 import { StudentListActions } from "./action-types";
-import { allStudentsFailed, allStudentsLoaded, studentDeleted, studentDeletingFailed, studentUpdated, studentUpdatingFailed } from "./student.actions";
 
 @Injectable()
 export class StudentsEffects {
@@ -30,8 +29,10 @@ export class StudentsEffects {
                             return StudentListActions.allStudentsLoaded({ students: studentArray })
                         }
                         ),
-                        catchError((errorMsg: string) =>
-                            of(StudentListActions.allStudentsFailed({ payload: { error: errorMsg } }))
+                        catchError((errorMsg: string) => {
+                            alert(errorMsg);
+                            return of(StudentListActions.allStudentsFailed({ error: errorMsg }))
+                        }
                         )
                     )
                 )
@@ -93,6 +94,25 @@ export class StudentsEffects {
                             alert(errorMsg)
                             return of(StudentListActions.studentUpdatingFailed({ error: errorMsg }))
                         })
+                    )
+                )
+            )
+    )
+    addStudent$ = createEffect(
+        () => this.actions$
+            .pipe(
+                ofType(StudentListActions.addStudent),
+                switchMap(action =>
+                    this.studentsService.addStudent(action.student).pipe(
+                        map(student =>
+                            StudentListActions.studentAdded({ student: student })
+                        ),
+
+                        catchError((errorMassege: string) => {
+                            alert(errorMassege);
+                            return of(StudentListActions.studentAddingFailed({ error: errorMassege }))
+                        }
+                        )
                     )
                 )
             )

@@ -21,10 +21,10 @@ export const studentReducer = createReducer(
     ),
     on(StudentListActions.studentUpdated,
         (state, action) =>
-            adapter.updateOne(action.student, state)),
-    on(StudentListActions.studentUpdatingFailed,
+            adapter.updateOne(action.student, state)
+            ),
+    on(StudentListActions.studentAdded,
         (state, action)=> 
-        state
-    )
-
+        adapter.addOne(action.student, state)
+        )
 )

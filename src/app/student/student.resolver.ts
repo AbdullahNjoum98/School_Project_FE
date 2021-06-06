@@ -2,9 +2,10 @@ import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { finalize, first, tap } from "rxjs/operators";
+import { finalize, first, map, tap } from "rxjs/operators";
 import { AppState } from "../reducers";
 import { loadAllStudents } from "./student.actions";
+import { getAllStudents } from "./student.selectors";
 
 @Injectable({
     providedIn: 'root'
@@ -14,10 +15,12 @@ export class StudentReslover implements Resolve<any> {
     constructor(private store: Store<AppState>){}
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<any>
     {
+        let dataExists:boolean; 
+        this.store.select(getAllStudents).subscribe(e=> e.length===0? dataExists=true: dataExists=false);
         return this.store.
             pipe(
                 tap(()=>{
-                    if(!this.loading){
+                    if(!this.loading && dataExists){
                         this.loading = true;
                         this.store.dispatch(loadAllStudents());
                     }
