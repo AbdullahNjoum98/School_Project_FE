@@ -8,14 +8,26 @@ export const loadAllStudents = createAction(
 );
 export const allStudentsFailed = createAction(
     "[Load Students Effect] All Students Failed",
-    props<{ payload: {error: string}}>()
+    props<{ error: string}>()
 );
 export const allStudentsLoaded = createAction(
     "[Load Students Effect] All Students Loaded",
     props<{students:StudentResource[] }>()
 );
+export const addStudent = createAction(
+    "[Add Student Component] Add Student",
+    props<{ student: StudentVM }>()
+)
+export const studentAdded = createAction(
+    "[Add Student Effect] Student Added",
+    props<{student: StudentResource}>()
+)
+export const studentAddingFailed = createAction(
+    "[Add Student Effect] Student Addding Failed",
+    props<{error: string}>()
+)
 export const updateStudent = createAction(
-    "[Update Student Resolver] Update Student",
+    "[Update Student Component] Update Student",
     props<{student: StudentVM}>()
 );
 export const studentUpdated = createAction(
@@ -27,7 +39,7 @@ export const studentUpdatingFailed = createAction(
     props<{ error: string }>()
 );
 export const deleteStudent = createAction(
-    "[Delete Student Resolver] Delete Student",
+    "[Delete Student Component] Delete Student",
     props<{studentId:number }>()
 );
 export const studentDeleted = createAction(

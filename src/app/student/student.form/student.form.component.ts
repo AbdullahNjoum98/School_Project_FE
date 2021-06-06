@@ -111,15 +111,18 @@ export class AddEditStudentComponent implements OnInit {
           favCourses: this.selectedCourses.slice(),
           teacher: this.selectedTeacher
         };
+        this.store.dispatch(StudentListActions.addStudent({student: student}));
+        this.router.navigate(['students']);
+
         // Add employee to Database
-        this.studentsService.addStudent(student).subscribe(item => {
-          // Add employee to UI
-          this.students.push(item);
-          this.router.navigate(['students']);
-        },
-          err => {
-            alert(err.error);
-          });
+        // this.studentsService.addStudent(student).subscribe(item => {
+        //   // Add employee to UI
+        //   this.students.push(item);
+        //   this.router.navigate(['students']);
+        // },
+        //   err => {
+        //     alert(err.error);
+        //   });
       }
     }
     else if (process === 'Edit') {
@@ -152,18 +155,8 @@ export class AddEditStudentComponent implements OnInit {
           favCourses: this.selectedCourses,
           teacher: this.selectedTeacher
         };
-        debugger;
         this.store.dispatch(StudentListActions.updateStudent({student}))
-        // Reflect changes on Database
-        // this.studentsService.editStudent(student).subscribe(item => {
-        //   alert('Student has been Edited Successfully!');
-        //   // Reflect changes on UI
-        //   this.students.push(item);
         this.router.navigate(['students']);
-        // },
-        //   err => {
-        //     alert(err.error);
-        //   });
       }
     }
   }
