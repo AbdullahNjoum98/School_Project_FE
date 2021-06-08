@@ -9,5 +9,5 @@ export const getAllStudents = createSelector(
 );
 export const getStudent= (id: number)=> createSelector(
     (state: AppState)=> state.studentState.entities[id],
-    (student) => student 
+    (student) => <StudentResource>student 
 );
