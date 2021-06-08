@@ -50,6 +50,17 @@ export const studentDeletingFailed = createAction(
     "[Delete Students Effect] Deleting Failed",
     props<{ error: string }>()
 );
-
+export const loadStudent = createAction(
+    "[Get Student Route] Student Loading",
+    props<{id : number}>()
+);
+export const studentLoadingFailed = createAction(
+    "[Get Student Effect] Student Loading Failed",
+    props<{error: string}>()
+);
+export const studentLoaded = createAction(
+    "[Get Student Effect] Student Loaded",
+    props<{student: StudentResource}>()
+);
 
 

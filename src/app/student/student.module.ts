@@ -2,24 +2,28 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StudentComponent } from './student-list/student-list.component';
 import {AddEditStudentComponent} from './student.form/student.form.component';
-import { StudentReslover } from './student.resolver';
+import { StudentListReslover } from './student-list/student-list.resolver';
 import { EffectsModule } from '@ngrx/effects';
 import { StudentsEffects } from './students.effects';
 import { StudentsService } from 'src/services/students.service';
 import { StoreModule } from '@ngrx/store';
 import { studentReducer } from './student.reducer';
+import { StudentFormReslover } from './student.form/student.form.resolver';
 
 const routes:Routes=[
   {
     path:'',
     component:StudentComponent,
     resolve: {
-      students: StudentReslover
+      students: StudentListReslover
     }
   },
   {
     path:'addeditstudent/:id',
-    component:AddEditStudentComponent
+    component:AddEditStudentComponent,
+    resolve: {
+      student: StudentFormReslover
+    }
   }
 ];
 @NgModule({
@@ -32,6 +36,6 @@ const routes:Routes=[
      )
   ],
   exports: [RouterModule],
-  providers: [ StudentsService, StudentReslover]
+  providers: [ StudentsService, StudentFormReslover, StudentListReslover]
 })
 export class StudentRoutingModule { }
