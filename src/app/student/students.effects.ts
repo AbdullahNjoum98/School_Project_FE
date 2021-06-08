@@ -2,17 +2,13 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
 import { catchError, map, switchMap } from "rxjs/operators";
-import { FavCourseResource } from "src/interfaces/fav-course-resource";
 import { StudentResource } from "src/interfaces/studentResource";
-import { TeacherVM } from "src/interfaces/teacher-vm";
-import { CoursesService } from "src/services/courses.service";
 import { StudentsService } from "src/services/students.service";
-import { TeachersService } from "src/services/teachers.service";
 import { StudentListActions } from "./action-types";
 
 @Injectable()
 export class StudentsEffects {
-    constructor(private studentsService: StudentsService, private teacherService: TeachersService, private coursesService: CoursesService, private actions$: Actions) { }
+    constructor(private studentsService: StudentsService, private actions$: Actions) { }
     loadStudents$ = createEffect(
         () => this.actions$
             .pipe(
@@ -61,34 +57,14 @@ export class StudentsEffects {
         () => this.actions$
             .pipe(
                 ofType(StudentListActions.updateStudent),
-                switchMap(action =>
+                switchMap((action) =>
                     this.studentsService.editStudent(action.student).pipe(
                         map((studentEntity) => {
-                            let student: StudentResource = { id: 0, favCourseString: '', email: '', name: '', phone: '', teacher: { id: 0, degree: '', name: '' }, favCourses: [] };
-                            let teacherEnitity: TeacherVM = { id: 0, degree: '', name: '' };
-                            let courseEntities: FavCourseResource[] = [];
-                            let coursesString = '';
-                            this.teacherService.getTeacherById(action.student.teacher + '').pipe(
-                                map(teacher => teacherEnitity = teacher)
+                            studentEntity.favCourseString=''
+                            studentEntity.favCourses.forEach(course =>
+                                studentEntity.favCourseString = studentEntity.favCourseString + course.name+ ','
                             )
-                            this.coursesService.getAllCourses().pipe(
-                                map((courses) => {
-                                    courseEntities = courses.filter(e => action.student.favCourses.includes(e.id));
-                                    courseEntities.map((item) => coursesString = coursesString + item.name + ',')
-                                    return courseEntities;
-                                }
-                                )
-                            )
-                            student = {
-                                email: studentEntity.email,
-                                name: studentEntity.name,
-                                id: studentEntity.id,
-                                phone: studentEntity.phone,
-                                teacher: teacherEnitity,
-                                favCourses: courseEntities,
-                                favCourseString: coursesString
-                            }
-                            return StudentListActions.studentUpdated({ student: { id: student.id, changes: student } });
+                            return StudentListActions.studentUpdated({ student: { id: studentEntity.id, changes: studentEntity } });
                         }),
                         catchError((errorMsg) => {
                             alert(errorMsg)
@@ -107,7 +83,6 @@ export class StudentsEffects {
                         map(student =>
                             StudentListActions.studentAdded({ student: student })
                         ),
-
                         catchError((errorMassege: string) => {
                             alert(errorMassege);
                             return of(StudentListActions.studentAddingFailed({ error: errorMassege }))
@@ -115,6 +90,22 @@ export class StudentsEffects {
                         )
                     )
                 )
+            )
+    )
+    loadStudent$ = createEffect(
+        () => this.actions$
+            .pipe(
+                ofType(StudentListActions.loadStudent),
+                switchMap(action =>
+                    this.studentsService.getStudentById(action.id + '').pipe(
+                        map(student =>
+                            StudentListActions.studentLoaded({ student: student })
+                        ),
+                        catchError((errorMessage: string) => {
+                            alert(errorMessage);
+                            return of(StudentListActions.studentLoadingFailed({ error: errorMessage }))
+                        })
+                    ))
             )
     )
 }

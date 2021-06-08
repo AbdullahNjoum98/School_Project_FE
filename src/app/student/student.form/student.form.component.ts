@@ -10,6 +10,7 @@ import { TeachersService } from 'src/services/teachers.service';
 import { AppState } from 'src/app/reducers';
 import { Store } from '@ngrx/store';
 import { StudentListActions } from '../action-types';
+import { getStudent } from '../student.selectors';
 
 @Component({
   selector: 'app-add-edit-student',
@@ -48,13 +49,15 @@ export class AddEditStudentComponent implements OnInit {
     this.Id = +this.route.snapshot.params['id'];
     if (this.Id !== 0) {
       this.AddOrEdit = 'Edit';
-      this.studentsService.getStudentById(this.Id + '').subscribe(e => {
-        this.Name = e.name;
-        this.Phone = e.phone;
-        this.Email = e.email;
-        this.selectedCourses = this.getIds(e.favCourses);
-        this.selectedTeacher = e.teacher.id;
-      });
+      this.store.select(getStudent(this.Id)).subscribe(
+        e => {
+          e = <StudentResource> e;
+          this.Name = e.name;
+          this.Phone = e.phone;
+          this.Email = e.email;
+          this.selectedCourses = this.getIds(e.favCourses);
+          this.selectedTeacher = e.teacher.id;
+        });
     }
     this.courseService.getAllCourses().subscribe(e => {
       e.forEach(item => {
@@ -114,15 +117,6 @@ export class AddEditStudentComponent implements OnInit {
         this.store.dispatch(StudentListActions.addStudent({student: student}));
         this.router.navigate(['students']);
 
-        // Add employee to Database
-        // this.studentsService.addStudent(student).subscribe(item => {
-        //   // Add employee to UI
-        //   this.students.push(item);
-        //   this.router.navigate(['students']);
-        // },
-        //   err => {
-        //     alert(err.error);
-        //   });
       }
     }
     else if (process === 'Edit') {

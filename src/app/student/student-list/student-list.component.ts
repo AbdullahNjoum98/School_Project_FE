@@ -20,7 +20,6 @@ export class StudentComponent implements OnInit {
         this.sts = <StudentResource[]>studentsArr
       }
       );
-    
   }
   deleteStudent(studentId: number): void {
     this.store.dispatch(StudentListActions.deleteStudent({ studentId }))
