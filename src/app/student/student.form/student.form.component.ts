@@ -52,11 +52,13 @@ export class AddEditStudentComponent implements OnInit {
       this.store.select(getStudent(this.Id)).subscribe(
         e => {
           e = <StudentResource> e;
+          if(e){
           this.Name = e.name;
           this.Phone = e.phone;
           this.Email = e.email;
           this.selectedCourses = this.getIds(e.favCourses);
           this.selectedTeacher = e.teacher.id;
+          }
         });
     }
     this.courseService.getAllCourses().subscribe(e => {
