@@ -25,9 +25,9 @@ export class StudentsEffects {
                             return StudentListActions.allStudentsLoaded({ students: studentArray })
                         }
                         ),
-                        catchError((errorMsg: string) => {
-                            alert(errorMsg);
-                            return of(StudentListActions.allStudentsFailed({ error: errorMsg }))
+                        catchError((errorMassege) => {
+                            alert(errorMassege.message);
+                            return of(StudentListActions.allStudentsFailed({ error: errorMassege.message }))
                         }
                         )
                     )
@@ -43,9 +43,9 @@ export class StudentsEffects {
                         map(() =>
                             StudentListActions.studentDeleted({ studentId: action.studentId })
                         ),
-                        catchError((errorMsg: string) => {
-                            alert(errorMsg);
-                            return of(StudentListActions.studentDeletingFailed({ error: errorMsg }))
+                        catchError((errorMassege) => {
+                            alert(errorMassege.message);
+                            return of(StudentListActions.studentDeletingFailed({ error: errorMassege.message }))
                         }
                         )
 
@@ -66,9 +66,9 @@ export class StudentsEffects {
                             )
                             return StudentListActions.studentUpdated({ student: { id: studentEntity.id, changes: studentEntity } });
                         }),
-                        catchError((errorMsg) => {
-                            alert(errorMsg)
-                            return of(StudentListActions.studentUpdatingFailed({ error: errorMsg }))
+                        catchError((errorMassege) => {
+                            alert(errorMassege.message)
+                            return of(StudentListActions.studentUpdatingFailed({ error: errorMassege.message }))
                         })
                     )
                 )
@@ -83,9 +83,9 @@ export class StudentsEffects {
                         map(student =>
                             StudentListActions.studentAdded({ student: student })
                         ),
-                        catchError((errorMassege: string) => {
-                            alert(errorMassege);
-                            return of(StudentListActions.studentAddingFailed({ error: errorMassege }))
+                        catchError((errorMassege) => {
+                            alert(errorMassege.message);
+                            return of(StudentListActions.studentAddingFailed({ error: errorMassege.message }))
                         }
                         )
                     )
@@ -101,9 +101,9 @@ export class StudentsEffects {
                         map(student =>
                             StudentListActions.studentLoaded({ student: student })
                         ),
-                        catchError((errorMessage: string) => {
-                            alert(errorMessage);
-                            return of(StudentListActions.studentLoadingFailed({ error: errorMessage }))
+                        catchError((errorMessage) => {
+                            alert(errorMessage.message);
+                            return of(StudentListActions.studentLoadingFailed({ error: errorMessage.message }))
                         })
                     ))
             )
