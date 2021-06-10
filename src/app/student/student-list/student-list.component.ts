@@ -14,7 +14,7 @@ import { StudentListActions } from '../action-types';
 export class StudentComponent implements OnInit {
   sts: StudentResource[] = [];
 
-  constructor(private studentService: StudentsService, private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>) { }
   ngOnInit(): void {
       this.store.pipe(select(getAllStudents)).subscribe(studentsArr => {
         this.sts = <StudentResource[]>studentsArr
