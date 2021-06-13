@@ -80,9 +80,13 @@ export class StudentsEffects {
                 ofType(StudentListActions.addStudent),
                 switchMap(action =>
                     this.studentsService.addStudent(action.student).pipe(
-                        map(student =>
-                            StudentListActions.studentAdded({ student: student })
-                        ),
+                        map(student =>{
+                            student.favCourseString=''
+                            student.favCourses.forEach(course =>
+                                student.favCourseString = student.favCourseString + course.name+ ','
+                            )
+                            return StudentListActions.studentAdded({ student: student })
+                            }),
                         catchError((errorMassege) => {
                             alert(errorMassege.message);
                             return of(StudentListActions.studentAddingFailed({ error: errorMassege.message }))
